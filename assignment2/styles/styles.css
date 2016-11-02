@@ -1,0 +1,16 @@
+.message {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.message.empty {
+    color: red;
+    border: 1px red solid;
+    padding: 5px;
+}
+
+.message.filled {
+    color: green;
+    border: 1px green solid;
+    padding: 5px;
+}
