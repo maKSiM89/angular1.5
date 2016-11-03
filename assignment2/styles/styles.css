@@ -1,16 +1,18 @@
-.message {
-    font-size: 1.3em;
+.emptyMessage {
     font-weight: bold;
-}
-
-.message.empty {
     color: red;
-    border: 1px red solid;
-    padding: 5px;
+    font-size: 1.2em;
 }
 
-.message.filled {
+li {
+    margin-bottom: 7px;
+    font-size: 1.2em;
+}
+
+li > button {
+margin-left: 6px;
+}
+
+button > span {
     color: green;
-    border: 1px green solid;
-    padding: 5px;
 }

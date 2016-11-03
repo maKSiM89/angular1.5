@@ -1,52 +1,61 @@
-;(function () {
+;( function () {
 	'use strict';
 
 	angular
-		.module('LunchChecker', [])
-		.controller('LunchCheckerController', LunchCheckerController);
+		.module( 'ShoppingListCheckOff', [] )
+		.controller( 'ToBuyController', ToBuyController )
+		.controller( 'AlreadyBoughtController', AlreadyBoughtController )
+		.service( 'ShoppingListCheckOffService', ShoppingListCheckOffService );
 
-	LunchCheckerController.$inject = ['$scope'];
-	function LunchCheckerController($scope) {
-		$scope.dishes = '';
-		$scope.message = '';
-		$scope.messageClass = '';
-		$scope.checkIfTooMuchItems = checkIfTooMuchItems;
+	ToBuyController.$inject = ['ShoppingListCheckOffService'];
+	function ToBuyController( ShoppingListCheckOffService ) {
+		var toBuyCtrl = this,
+			service = ShoppingListCheckOffService;
 
-		const emptyClass = 'empty';
-		const filledClass = 'filled';
-		
-		function checkIfTooMuchItems() {
-			var lunchItemsCount = getLunchItemsCount(),
-				message = '';
-
-			if ( lunchItemsCount < 1 ) {
-				showMessage('Please enter data first', emptyClass);
-			} else if ( lunchItemsCount <= 3) {
-				showMessage('Enjoy!', filledClass);
-			} else {
-				showMessage('Too much!', filledClass);
-			}
-		}
-
-		function getLunchItemsCount() {
-			var count = 0, items;
-
-			if ($scope.dishes !== '') {
-				items = $scope.dishes.split(', ');
-
-				items.forEach( function ( item ) {
-					if ( item !== '' ) {
-						count++;
-					}
-				});
-			}
-
-			return count;
-		}
-		
-		function showMessage( message, htmlClass ) {
-			$scope.message = message;
-			$scope.messageClass = htmlClass;
+		toBuyCtrl.items = service.getToBuyItems();
+		toBuyCtrl.buyItem = function ( $index ) {
+			service.buyItem( $index );
 		}
 	}
-})();
+
+	AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+	function AlreadyBoughtController( ShoppingListCheckOffService ) {
+		var boughtCtrl = this,
+			service = ShoppingListCheckOffService;
+
+		boughtCtrl.items = service.getBoughtItems();
+	}
+
+	function ShoppingListCheckOffService() {
+		var service = this,
+			toBuyItems = [
+				{ name: "cookies", quantity: 10 },
+				{ name: "apples", quantity: 20 },
+				{ name: "bottles", quantity: 2 },
+				{ name: "bread", quantity: 1 },
+				{ name: "eggs", quantity: 30 }
+			],
+			boughtItems = [];
+
+		service.getToBuyItems = function () {
+			return toBuyItems;
+		};
+
+		service.getBoughtItems = function () {
+			return boughtItems;
+		};
+
+		service.buyItem = function ( $index ) {
+			addItemToBoughtItems( $index );
+			removeItemFromToBuyItems( $index );
+		};
+
+		function addItemToBoughtItems( $index ) {
+			boughtItems.push( toBuyItems[$index] );
+		};
+
+		function removeItemFromToBuyItems( $index ) {
+			toBuyItems.splice( $index, 1 );
+		}
+	}
+} )();
