@@ -7,34 +7,40 @@
 		.service( 'MenuSearchService', MenuSearchService )
 		.constant( 'ApiBasePath', 'https://davids-restaurant.herokuapp.com' )
 		.directive( 'foundItems', foundItemsDirective )
-		.directive( 'loader', loaderDirective )
+		.directive( 'loader', loaderDirective );
 
 	NarrowItDownController.$inject = ['MenuSearchService'];
 	function NarrowItDownController( MenuSearchService ) {
 		var ctrl = this;
 
-		ctrl.searchTerm = '';
 		ctrl.found = [];
+		ctrl.initState = true;
+		ctrl.isDataLoaded = true;
 		ctrl.showResults = showResults;
 		ctrl.removeItem = removeItem;
-		ctrl.initState = true;
+		ctrl.searchTerm = '';
 
 		function showResults() {
 			if ( ctrl.searchTerm !== '' ) {
+				ctrl.isDataLoaded = false;
 				var promise = MenuSearchService.getMatchedMenuItems(ctrl.searchTerm);
 
-				ctrl.isDataLoaded = false;
 				promise
 					.then(function (response) {
 						ctrl.found = response;
 						ctrl.initState = false;
+						ctrl.isDataLoaded = true;
 					})
 					.catch(function (error) {
 						ctrl.initState = false;
+						ctrl.isDataLoaded = true;
 						console.log("Something went terribly wrong.");
 					});
+			} else {
+				ctrl.found = [];
+				ctrl.initState = false;
 			}
-		};
+		}
 
 		function removeItem( index ) {
 			ctrl.found.splice( index, 1 );
@@ -54,7 +60,7 @@
 					return filterMenuItems( response.data.menu_items, searchTerm );
 				}
 			});
-		};
+		}
 
 		function filterMenuItems( items, searchTerm ) {
 			var filteredItems = [];
@@ -77,9 +83,17 @@
 			templateUrl: 'foundItems.html',
 			scope: {
 				foundResults: '<found',
-				onRemove: '&',
-				initState: '<'
-			}
+				onRemove: '&'
+			},
+			transclude: true
+		};
+
+		return ddo;
+	}
+
+	function loaderDirective() {
+		var ddo = {
+			templateUrl: 'loader/itemsloaderindicator.template.html'
 		};
 
 		return ddo;

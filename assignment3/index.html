@@ -21,8 +21,12 @@
             <found-items
                 found="ctrl.found"
                 on-remove="ctrl.removeItem( index )"
-                init-state="ctrl.initState">
+            >
+                <div ng-if="ctrl.found.length === 0 && !ctrl.initState" class="col-lg-12 error">
+                    Nothing found!
+                </div>
             </found-items>
+            <loader ng-show="!ctrl.isDataLoaded && !ctrl.initState"></loader>
         </div>
         <script src="js/angular.js"></script>
         <script src="app.js"></script>

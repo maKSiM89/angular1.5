@@ -1,0 +1,147 @@
+/** angular material linear Indeterminate loader */
+md-progress-linear .md-container {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    height: 5px;
+    -webkit-transform: translate(0,0) scale(1,1);
+    transform: translate(0,0) scale(1,1);
+}
+
+md-progress-linear.md-default-theme .md-container,
+md-progress-linear .md-container {
+    background-color: rgb(170,209,249);
+}
+
+md-progress-linear .md-container.md-mode-indeterminate .md-bar1,
+md-progress-linear .md-container.md-mode-indeterminate .md-bar2
+{
+    -webkit-animation: md-progress-linear-indeterminate-scale-1 4s infinite, md-progress-linear-indeterminate-1 4s infinite;
+    animation: md-progress-linear-indeterminate-scale-1 4s infinite, md-progress-linear-indeterminate-1 4s infinite;
+}
+
+md-progress-linear .md-container .md-bar1,
+.md-progress-linear .md-container .md-bar2 {
+    -webkit-transition: -webkit-transform .2s linear;
+    transition: -webkit-transform .2s linear;
+    transition: transform .2s linear;
+    transition: transform .2s linear,-webkit-transform .2s linear;
+}
+
+md-progress-linear .md-container .md-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+}
+
+md-progress-linear .md-bar {
+    background-color: rgb(16,108,200);
+}
+
+@-webkit-keyframes md-progress-linear-indeterminate-scale-1 {
+    0% {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1);
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear
+    }
+
+    36.6% {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1);
+        -webkit-animation-timing-function: cubic-bezier(.33473,.12482,.78584,1);
+        animation-timing-function: cubic-bezier(.33473,.12482,.78584,1)
+    }
+
+    69.15% {
+        -webkit-transform: scaleX(.83);
+        transform: scaleX(.83);
+        -webkit-animation-timing-function: cubic-bezier(.22573,0,.23365,1.37098);
+        animation-timing-function: cubic-bezier(.22573,0,.23365,1.37098)
+    }
+
+    to {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1)
+    }
+}
+
+@keyframes md-progress-linear-indeterminate-scale-1 {
+    0% {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1);
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear
+    }
+
+    36.6% {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1);
+        -webkit-animation-timing-function: cubic-bezier(.33473,.12482,.78584,1);
+        animation-timing-function: cubic-bezier(.33473,.12482,.78584,1)
+    }
+
+    69.15% {
+        -webkit-transform: scaleX(.83);
+        transform: scaleX(.83);
+        -webkit-animation-timing-function: cubic-bezier(.22573,0,.23365,1.37098);
+        animation-timing-function: cubic-bezier(.22573,0,.23365,1.37098)
+    }
+
+    to {
+        -webkit-transform: scaleX(.1);
+        transform: scaleX(.1)
+    }
+}
+
+@-webkit-keyframes md-progress-linear-indeterminate-1 {
+    0% {
+        left: -105.16667%;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear
+    }
+
+    20% {
+        left: -105.16667%;
+        -webkit-animation-timing-function: cubic-bezier(.5,0,.70173,.49582);
+        animation-timing-function: cubic-bezier(.5,0,.70173,.49582)
+    }
+
+    69.15% {
+        left: 21.5%;
+        -webkit-animation-timing-function: cubic-bezier(.30244,.38135,.55,.95635);
+        animation-timing-function: cubic-bezier(.30244,.38135,.55,.95635)
+    }
+
+    to {
+        left: 95.44444%
+    }
+}
+
+@keyframes md-progress-linear-indeterminate-1 {
+    0% {
+        left: -105.16667%;
+        -webkit-animation-timing-function: linear;
+        animation-timing-function: linear
+    }
+
+    20% {
+        left: -105.16667%;
+        -webkit-animation-timing-function: cubic-bezier(.5,0,.70173,.49582);
+        animation-timing-function: cubic-bezier(.5,0,.70173,.49582)
+    }
+
+    69.15% {
+        left: 21.5%;
+        -webkit-animation-timing-function: cubic-bezier(.30244,.38135,.55,.95635);
+        animation-timing-function: cubic-bezier(.30244,.38135,.55,.95635)
+    }
+
+    to {
+        left: 95.44444%
+    }
+}
