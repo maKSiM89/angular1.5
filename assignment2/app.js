@@ -52,7 +52,7 @@
 
 		function addItemToBoughtItems( $index ) {
 			boughtItems.push( toBuyItems[$index] );
-		};
+		}
 
 		function removeItemFromToBuyItems( $index ) {
 			toBuyItems.splice( $index, 1 );

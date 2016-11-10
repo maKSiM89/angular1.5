@@ -1,0 +1,26 @@
+<table class="table table-bordered" ng-if="foundResults.length > 0">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Short Name</th>
+            <th>Description</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="menuItem in foundResults">
+            <th scope="row">{{ $index + 1 }}</th>
+            <td>{{ menuItem.name }}</td>
+            <td>{{ menuItem.short_name }}</td>
+            <td>{{ menuItem.description }}</td>
+            <td>
+                <button class="btn btn-primary" ng-click="onRemove( {index: $index} );">Don't want this one!</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div ng-if="foundResults.length === 0 && !initState" class="col-lg-12 error">
+    Nothing found!
+</div>
