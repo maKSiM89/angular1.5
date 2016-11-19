@@ -59,3 +59,21 @@ input[type="text"] {
   font-weight: bold;
   display: block;
 }
+
+a {
+  cursor: pointer;
+}
+
+.menu-container {
+  padding: 0 50px;
+}
+
+div.menu-container .items li{
+  cursor: help;
+}
+
+.loading-icon {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+}

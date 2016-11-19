@@ -2,6 +2,6 @@
 	'use strict';
 
 	angular
-		.module( 'MenuApp', ['Data', 'ui.router'] );
+		.module( 'MenuApp', ['Data', 'ui.router', 'Loader'] );
 
 } )();

@@ -1,26 +1,35 @@
 ;(function () {
 
 	angular.module('Data')
-		.factory( 'MenuDataService', MenuDataService );
+		.factory( 'MenuDataService', MenuDataService )
+		.constant( 'ApiCategoriesBasePath', 'https://davids-restaurant.herokuapp.com/categories.json' )
+		.constant( 'ApiMenuItemsBasePath', 'https://davids-restaurant.herokuapp.com/menu_items.json' );
 
-	function MenuDataService() {
+	MenuDataService.$inject = ['$http', 'ApiCategoriesBasePath', 'ApiMenuItemsBasePath'];
+	function MenuDataService( $http, ApiCategoriesBasePath, ApiMenuItemsBasePath ) {
 		return {
 			getAllCategories: getAllCategories,
 			getItemsForCategory: getItemsForCategory
 		};
-		
+
 		function getAllCategories() {
-			/*this method should return
-			a promise which is a result of using the
-			$http service, using the following REST API endpoint:
-				https://davids-restaurant.herokuapp.com/categories.json*/
+			return $http.get(
+				ApiCategoriesBasePath
+			).then( function ( response ) {
+				if ( typeof response.data !== 'undefined' ) {
+					return response.data;
+				}
+			});
 		}
 		
 		function getItemsForCategory( categoryShortName ) {
-			/*this method should return a
-			promise which is a result of using
-			the $http service, using the following REST API
-			endpoint: https://davids-restaurant.herokuapp.com/menu_items.json?category=, where, before the call to the server, your code should append whatever categoryShortName value was passed in as an argument into the getItemsForCategory method.*/
+			return $http.get(
+				ApiMenuItemsBasePath + '?category=' + categoryShortName
+			).then( function ( response ) {
+				if ( typeof response.data !== 'undefined' ) {
+					return response.data;
+				}
+			});
 		}
 	}
 })();
