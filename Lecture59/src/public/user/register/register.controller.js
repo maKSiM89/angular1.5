@@ -10,19 +10,24 @@
 			userService = UserService;
 
 		ctrl.submit = submit;
+		ctrl.changeMenuNumber = changeMenuNumber;
+
 		ctrl.user = {};
 
 		function submit() {
+			// nothing to do
+		}
+
+		function changeMenuNumber() {
 			ctrl.completed = false;
 			ctrl.error = false;
 
 			if ( ctrl.user.menu_number ) {
 				MenuService.getMenuItem( ctrl.user.menu_number )
 					.then( function ( response ) {
-						console.log( ctrl.user );
 						ctrl.user.menu_dish = response;
-						console.log( ctrl.user );
-						UserService.setUserData( ctrl.user );
+						userService.setUserData( ctrl.user );
+
 						ctrl.completed = true;
 					})
 					.catch( function () {

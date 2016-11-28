@@ -82,21 +82,22 @@
                 class="form-control"
                 placeholder="Menu Number"
                 ng-model="ctrl.user.menu_number"
+                ng-blur="ctrl.changeMenuNumber()"
             >
             <span ng-if="ctrl.error">
-               No such menu number exists.
+                No such menu number exists.
             </span>
         </div>
 
         <button
             class="btn btn-default"
-            ng-disabled="registerForm.$invalid"
+            ng-disabled="registerForm.$invalid || !ctrl.completed"
             ng-click="ctrl.submit()"
         >
             Register
         </button>
-        <div id="info" ng-if="ctrl.completed">
-          Your information has been saved.
+        <div id="info" ng-if="registerForm.$submitted && ctrl.completed">
+            Your information has been saved.
         </div>
     </form>
 </div>
